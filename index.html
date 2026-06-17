@@ -18,6 +18,8 @@
 
 <body>
 
+<div class="container">
+
 <div id="app"></div>
 
 <header class="header">
@@ -31,21 +33,28 @@
 <main>
 
     <form class="note-form" name="notes">
+        <label for="note-title">
+            Название заметки
+        </label>
+
         <input
+                id="note-title"
                 type="text"
                 name="title"
                 placeholder="Введите заголовок..."
         >
 
+        <label for="note-content">
+            Описание новой заметки
+        </label>
+
         <textarea
+                id="note-content"
                 name="content"
                 placeholder="Введите текст заметки..."
         ></textarea>
-
-        <button type="submit">
-            Добавить заметку
-        </button>
-        <fieldset class="fieldset">
+        <div class="form-bottom">
+         <fieldset class="fieldset">
             <legend class="label">Выберите цвет заметки</legend>
             <ul class="radio-list">
                 <li>
@@ -64,7 +73,11 @@
                     <input class="radio" type="radio" name="color" value="purple" aria-label="purple" />
                 </li>
             </ul>
-        </fieldset>
+         </fieldset>
+         <button type="submit">
+            Добавить заметку
+         </button>
+        </div>
     </form>
 
     <div class="filter-box">
@@ -86,6 +99,8 @@
     </div>
 
 </main>
+
+</div>
 
 <script src="js/index.js"></script>
 
