@@ -117,7 +117,13 @@ const view = {
     },
 
     renderNotesCount(count) {
-        console.log('Количество заметок:', count)
+
+        // Находим span в шапке
+        const notesCountElement =
+            document.querySelector('#notes-count')
+
+        // Меняем текст внутри span
+        notesCountElement.textContent = count
     },
 }
 
