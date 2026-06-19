@@ -113,7 +113,26 @@ const view = {
     },
 
     renderNotes(notes) {
-        console.log('Рендерим заметки:', notes)
+
+        // Находим список заметок в HTML
+        const notesList =
+            document.querySelector('.notes-list')
+
+        // Очищаем список перед новой отрисовкой
+        notesList.innerHTML = ''
+
+        // Перебираем все заметки
+        notes.forEach((note) => {
+
+            // Создаём элемент списка
+            const li = document.createElement('li')
+
+            // Вставляем заголовок заметки
+            li.textContent = note.title
+
+            // Добавляем элемент в список
+            notesList.append(li)
+        })
     },
 
     renderNotesCount(count) {
