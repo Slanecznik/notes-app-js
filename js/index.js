@@ -127,10 +127,16 @@ const view = {
             // Создаём элемент списка
             const li = document.createElement('li')
 
-            // Вставляем заголовок заметки
-            li.textContent = note.title
+// Добавляем класс цвета
+            li.className = note.color
 
-            // Добавляем элемент в список
+// Добавляем содержимое карточки
+            li.innerHTML = `
+    <h3>${note.title}</h3>
+    <p>${note.content}</p>
+`
+
+// Добавляем элемент в список
             notesList.append(li)
         })
     },
