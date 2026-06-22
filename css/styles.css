@@ -164,3 +164,23 @@ legend {
 
     margin-bottom: 20px;
 }
+
+.notes-list li.green {
+    background-color: #C2F37D;
+}
+
+.notes-list li.yellow {
+    background-color: #F3DB7D;
+}
+
+.notes-list li.blue {
+    background-color: #7DE1F3;
+}
+
+.notes-list li.red {
+    background-color: #F37D7D;
+}
+
+.notes-list li.purple {
+    background-color: #E77DF3;
+}
