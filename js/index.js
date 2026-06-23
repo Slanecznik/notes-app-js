@@ -69,6 +69,18 @@ const model = {
 
         this.updateNotesView()
     },
+
+    toggleFavorite(noteId) {
+        this.notes = this.notes.map((note) => {
+            if (note.id === noteId) {
+                note.isFavorite = !note.isFavorite
+            }
+
+            return note
+        })
+
+        this.updateNotesView()
+    },
 }
 
 const controller = {
@@ -80,6 +92,10 @@ const controller = {
 
     toggleShowOnlyFavorite(isShowOnlyFavorite) {
         model.toggleShowOnlyFavorite(isShowOnlyFavorite)
+    },
+
+    toggleFavorite(noteId) {
+        model.toggleFavorite(noteId)
     },
 }
 
@@ -132,9 +148,18 @@ const view = {
 
 // Добавляем содержимое карточки
             li.innerHTML = `
-    <h3>${note.title}</h3>
+    <h3>
+        <span class="favorite-icon">
+            ${note.isFavorite ? '⭐' : '☆'}
+        </span>
+
+        ${note.title}
+    </h3>
+
     <p>${note.content}</p>
 `
+            const favoriteIcon =
+                li.querySelector('.favorite-icon')
 
 // Добавляем элемент в список
             notesList.append(li)
