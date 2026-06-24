@@ -161,6 +161,10 @@ const view = {
             const favoriteIcon =
                 li.querySelector('.favorite-icon')
 
+            favoriteIcon.addEventListener('click', () => {
+                controller.toggleFavorite(note.id)
+            })
+
 // Добавляем элемент в список
             notesList.append(li)
         })
