@@ -1,9 +1,12 @@
+/* =========================
+   Общие настройки
+========================= */
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
-
 
 body {
     margin: 0;
@@ -15,23 +18,124 @@ fieldset {
 }
 
 legend {
-    all: unset
+    all: unset;
 }
+
+/* =========================
+   Контейнер
+========================= */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* =========================
+   Шапка сайта
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.notes-count {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* =========================
+   Форма добавления заметки
+========================= */
+
+.note-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 600px;
+
+    margin-top: 20px;
+    padding: 25px;
+
+    background-color: white;
+    border-radius: 12px;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.note-form input[type="text"] {
+    width: 100%;
+
+    margin-top: 8px;
+    margin-bottom: 20px;
+    padding: 12px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+.note-form textarea {
+    width: 100%;
+    min-height: 120px;
+
+    margin-top: 8px;
+    margin-bottom: 20px;
+    padding: 12px;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+
+    resize: none;
+    font-size: 16px;
+}
+
+/* =========================
+   Нижняя часть формы
+========================= */
+
+.form-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+/* =========================
+   Выбор цвета
+========================= */
 
 .radio-list {
     display: flex;
     gap: 14px;
-    list-style: none;
-    padding-left: 0;
-}
 
+    padding-left: 0;
+
+    list-style: none;
+}
 
 .radio {
     appearance: none;
+
     display: inline-block;
+
     width: 24px;
     height: 24px;
+
     border-radius: 50%;
+
     background-color: green;
 }
 
@@ -57,113 +161,37 @@ legend {
 
 .radio:checked {
     border-color: white;
-    box-shadow: 0 0 0 3px white, /* Внутренняя обводка для создания промежутка */
-    0 0 0 4.5px #007BFF; /* Внешняя обводка */
+
+    box-shadow:
+            0 0 0 3px white,
+            0 0 0 4.5px #007BFF;
 }
 
-.note-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 600px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.header h1 {
-    margin: 0;
-}
-
-.notes-count {
-    margin: 0;
-    font-weight: 600;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.note-form {
-    background: white;
-
-    padding: 25px;
-
-    border-radius: 12px;
-
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-    margin-top: 20px;
-}
-
-.note-form input[type="text"] {
-    width: 100%;
-
-    padding: 12px;
-
-    margin-top: 8px;
-    margin-bottom: 20px;
-
-    border: 1px solid #d9d9d9;
-    border-radius: 8px;
-
-    font-size: 16px;
-}
-
-.note-form textarea {
-    width: 100%;
-
-    min-height: 120px;
-
-    padding: 12px;
-
-    margin-top: 8px;
-    margin-bottom: 20px;
-
-    border: 1px solid #d9d9d9;
-    border-radius: 8px;
-
-    font-size: 16px;
-
-    resize: none;
-}
-
-.form-bottom {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-top: 20px;
-}
+/* =========================
+   Список заметок
+========================= */
 
 .notes-list {
-    list-style: none;
-
-    padding: 0;
     margin-top: 30px;
+    padding: 0;
+
+    list-style: none;
 }
 
 .notes-list li {
-    background: white;
-
+    margin-bottom: 20px;
     padding: 20px;
 
     border-radius: 12px;
 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
 
-    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
+/* =========================
+   Цвета карточек
+========================= */
 
 .notes-list li.green {
     background-color: #C2F37D;
@@ -183,4 +211,21 @@ legend {
 
 .notes-list li.purple {
     background-color: #E77DF3;
+}
+
+/* =========================
+   Информационные сообщения
+========================= */
+
+.messages-box {
+    margin-top: 30px;
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background-color: #f8f8f8;
+
+    text-align: center;
+    font-size: 20px;
+    color: #777;
 }

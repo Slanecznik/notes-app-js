@@ -10,21 +10,24 @@ const MOCK_NOTES = [
     {
         id: 1,
         title: 'Работа с формами',
-        content: 'К определённым полям формы можно обратиться через form.elements по значению атрибута name',
+        content:
+            'К определённым полям формы можно обратиться через form.elements по значению атрибута name',
         color: colors.GREEN,
         isFavorite: false,
     },
     {
         id: 2,
         title: 'Flexbox (CSS)',
-        content: 'Flexbox позволяет удобно располагать элементы на странице.',
+        content:
+            'Flexbox позволяет удобно располагать элементы на странице.',
         color: colors.YELLOW,
         isFavorite: true,
     },
     {
         id: 3,
         title: 'Объекты (JavaScript)',
-        content: 'Объекты позволяют хранить данные в формате ключ-значение.',
+        content:
+            'Объекты позволяют хранить данные в формате ключ-значение.',
         color: colors.BLUE,
         isFavorite: false,
     },
@@ -48,6 +51,16 @@ const model = {
 
         view.renderNotes(notesToRender)
         view.renderNotesCount(notesToRender.length)
+
+        if (notesToRender.length === 0) {
+            if (this.isShowOnlyFavorite) {
+                view.renderMessage('Нет избранных заметок')
+            } else {
+                view.renderMessage('У вас пока нет заметок')
+            }
+        } else {
+            view.renderMessage('')
+        }
     },
 
     addNote(title, content, color) {
@@ -84,8 +97,8 @@ const model = {
 }
 
 const controller = {
-    addNote(title, content, color) {
-        model.addNote(title, content, color)
+    addNote(trimmedTitle, trimmedContent, color) {
+        model.addNote(trimmedTitle, trimmedContent, color)
 
         console.log('Заметка добавлена')
     },
@@ -100,89 +113,170 @@ const controller = {
 }
 
 const view = {
+
     init() {
-        const form = document.querySelector('.note-form')
+
+        const form =
+            document.querySelector('.note-form')
 
         const favoriteFilter =
             document.querySelector('#favorite-filter')
 
         form.addEventListener('submit', (event) => {
+
             event.preventDefault()
 
-            const title = form.elements.title.value
-            const content = form.elements.content.value
-            const color = form.elements.color.value
+            const title =
+                form.elements.title.value
 
-            controller.addNote(title, content, color)
+            const content =
+                form.elements.content.value
+
+            const color =
+                form.elements.color.value
+
+            const trimmedTitle =
+                title.trim()
+
+            const trimmedContent =
+                content.trim()
+
+            if (!trimmedTitle || !trimmedContent) {
+
+                view.renderMessage(
+                    'Заполните все поля'
+                )
+
+                return
+            }
+
+            controller.addNote(
+                title,
+                content,
+                color
+            )
+
+            form.elements.title.value = ''
+
+            form.elements.content.value = ''
+
+            form.elements.color.value =
+                colors.YELLOW
+
+            view.renderMessage('')
         })
 
         if (favoriteFilter) {
-            favoriteFilter.addEventListener('change', () => {
-                controller.toggleShowOnlyFavorite(
-                    favoriteFilter.checked
-                )
-            })
+
+            favoriteFilter.addEventListener(
+                'change',
+                () => {
+
+                    controller.toggleShowOnlyFavorite(
+                        favoriteFilter.checked
+                    )
+
+                }
+            )
+
         }
 
         this.renderNotes(model.notes)
-        this.renderNotesCount(model.notes.length)
+
+        this.renderNotesCount(
+            model.notes.length
+        )
     },
 
     renderNotes(notes) {
 
-        // Находим список заметок в HTML
+        // Находим список заметок
         const notesList =
             document.querySelector('.notes-list')
 
-        // Очищаем список перед новой отрисовкой
+        // Очищаем список
         notesList.innerHTML = ''
 
-        // Перебираем все заметки
+        // Перебираем заметки
         notes.forEach((note) => {
 
-            // Создаём элемент списка
-            const li = document.createElement('li')
+            // Создаём карточку
+            const li =
+                document.createElement('li')
 
-// Добавляем класс цвета
+            // Добавляем цвет
             li.className = note.color
 
-// Добавляем содержимое карточки
+            // Добавляем содержимое
             li.innerHTML = `
-    <h3>
-        <span class="favorite-icon">
-            ${note.isFavorite ? '⭐' : '☆'}
-        </span>
+                <h3>
+                    <span class="favorite-icon">
+                        ${note.isFavorite ? '⭐' : '☆'}
+                    </span>
 
-        ${note.title}
-    </h3>
+                    ${note.title}
+                </h3>
 
-    <p>${note.content}</p>
-`
+                <p>${note.content}</p>
+            `
+
             const favoriteIcon =
                 li.querySelector('.favorite-icon')
 
-            favoriteIcon.addEventListener('click', () => {
-                controller.toggleFavorite(note.id)
-            })
+            favoriteIcon.addEventListener(
+                'click',
+                () => {
 
-// Добавляем элемент в список
+                    controller.toggleFavorite(
+                        note.id
+                    )
+
+                }
+            )
+
+            // Добавляем карточку
             notesList.append(li)
+
         })
     },
-
     renderNotesCount(count) {
 
         // Находим span в шапке
         const notesCountElement =
             document.querySelector('#notes-count')
 
-        // Меняем текст внутри span
+        // Меняем количество заметок
         notesCountElement.textContent = count
+    },
+
+    renderMessage(message) {
+
+        // Находим блок сообщений
+        const messageBox =
+            document.querySelector('.messages-box')
+
+        if (message) {
+
+            // Показываем сообщение
+            messageBox.textContent = message
+
+        } else {
+
+            // Очищаем сообщение
+            messageBox.textContent = ''
+
+        }
     },
 }
 
+// =========================
+// Запуск приложения
+// =========================
+
 function init() {
+
     view.init()
+
 }
 
 init()
